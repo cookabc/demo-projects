@@ -13,34 +13,51 @@ import java.net.URL;
 public class Downloader {
 
     public static void main(String[] args) {
-        URL url;
         String address = "https://www.africau.edu/images/default/sample.pdf";
-
-        File file;
         String filePathName = "sample.pdf";
+        run(address, filePathName);
+    }
+
+    public static void run(String urlAddress, String fullPathFileName) {
+        final URL url;
+        HttpURLConnection httpURLConnection;
+
         FileOutputStream fos = null;
         BufferedOutputStream bout = null;
 
         try {
-            url = new URL(address);
-            HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection();
-            file = new File(filePathName);
+            url = new URL(urlAddress);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(30000);
+            httpURLConnection.setReadTimeout(30000);
+            httpURLConnection.setRequestMethod("GET");
+
+            File file = new File(fullPathFileName);
             if (file.exists()) {
-                // resume download, append to existing file
-                String lastModified = httpUrlConnection.getHeaderField("Last-Modified");
-                httpUrlConnection.setRequestProperty("If-Range", lastModified);
-                httpUrlConnection.setRequestProperty("Range", "bytes=" + file.length() + "-");
-                fos = new FileOutputStream(file, true);
+                if (file.length() == httpURLConnection.getContentLength()) {
+                    //we are done, return.
+                    return;
+                } else {
+                    // resume download, append to existing file
+                    String lastModified = httpURLConnection.getHeaderField("Last-Modified");
+                    httpURLConnection.setRequestProperty("If-Range", lastModified);
+                    httpURLConnection.setRequestProperty("Range", "bytes=" + file.length() + "-");
+                    fos = new FileOutputStream(file, true);
+                }
             } else {
+                // create brand-new file
                 fos = new FileOutputStream(file);
             }
 
-            bout = new BufferedOutputStream(fos, 1024);
-            int count;
-            byte[] data = new byte[1024];
-            BufferedInputStream in = new BufferedInputStream(httpUrlConnection.getInputStream());
-            while ((count = in.read(data, 0, 1024)) >= 0) {
-                bout.write(data, 0, count);
+            final int responseCode = httpURLConnection.getResponseCode();
+            if (responseCode == 200 || responseCode == 206) {
+                BufferedInputStream bin = new BufferedInputStream(httpURLConnection.getInputStream());
+                final byte[] buffer = new byte[1024];
+                int length;
+                bout = new BufferedOutputStream(fos, 1024);
+                while ((length = bin.read(buffer)) != -1) {
+                    bout.write(buffer, 0, length);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
