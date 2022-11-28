@@ -20,17 +20,13 @@ public class Downloader {
 
     public static void run(String urlAddress, String fullPathFileName) {
         final URL url;
-        HttpURLConnection httpURLConnection;
 
         FileOutputStream fos = null;
         BufferedOutputStream bout = null;
 
         try {
             url = new URL(urlAddress);
-            httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(30000);
-            httpURLConnection.setReadTimeout(30000);
-            httpURLConnection.setRequestMethod("GET");
+            HttpURLConnection httpURLConnection = initConnection(url);
 
             File file = new File(fullPathFileName);
             if (file.exists()) {
@@ -39,8 +35,9 @@ public class Downloader {
                     return;
                 } else {
                     // resume download, append to existing file
-                    String lastModified = httpURLConnection.getHeaderField("Last-Modified");
-                    httpURLConnection.setRequestProperty("If-Range", lastModified);
+                    long lastModified = httpURLConnection.getLastModified();
+                    httpURLConnection = initConnection(url);
+                    httpURLConnection.setRequestProperty("If-Range", String.valueOf(lastModified));
                     httpURLConnection.setRequestProperty("Range", "bytes=" + file.length() + "-");
                     fos = new FileOutputStream(file, true);
                 }
@@ -75,5 +72,15 @@ public class Downloader {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static HttpURLConnection initConnection(URL url) throws IOException {
+        HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+        httpURLConnection.setDoInput(true);
+        httpURLConnection.setDoOutput(true);
+        httpURLConnection.setConnectTimeout(30000);
+        httpURLConnection.setReadTimeout(30000);
+        httpURLConnection.setRequestMethod("GET");
+        return httpURLConnection;
     }
 }
