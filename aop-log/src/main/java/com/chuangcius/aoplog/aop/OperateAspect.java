@@ -2,6 +2,8 @@ package com.chuangcius.aoplog.aop;
 
 import com.chuangcius.aoplog.annotation.RecordOperate;
 import com.chuangcius.aoplog.bean.OperateLog;
+import com.chuangcius.aoplog.bean.Order;
+import com.chuangcius.aoplog.convert.Convert;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -37,8 +39,10 @@ public class OperateAspect {
             try {
                 MethodSignature signature = (MethodSignature) joinPoint.getSignature();
                 RecordOperate annotation = signature.getMethod().getAnnotation(RecordOperate.class);
+                Class<? extends Convert> convert = annotation.convert();
+                Convert logConvert = convert.getDeclaredConstructor().newInstance();
 
-                OperateLog operateLog = new OperateLog();
+                OperateLog operateLog = logConvert.convert((Order) joinPoint.getArgs()[0]);
                 operateLog.setDesc(annotation.desc());
                 operateLog.setResult(result.toString());
 

@@ -1,6 +1,7 @@
 package com.chuangcius.aoplog.convert;
 
 import com.chuangcius.aoplog.bean.OperateLog;
+import com.chuangcius.aoplog.bean.Order;
 import com.chuangcius.aoplog.bean.SaveOrder;
 
 /**
@@ -9,12 +10,12 @@ import com.chuangcius.aoplog.bean.SaveOrder;
  * @author chuanciug
  * @date 2022.11.29
  */
-public class SaveOrderConvert implements Convert<SaveOrder> {
+public class SaveOrderConvert implements Convert {
 
     @Override
-    public OperateLog convert(SaveOrder saveOrder) {
+    public OperateLog convert(Order order) {
         OperateLog operateLog = new OperateLog();
-        operateLog.setOrderId(saveOrder.getId());
+        operateLog.setOrderId(((SaveOrder) order).getId());
         return operateLog;
     }
 }

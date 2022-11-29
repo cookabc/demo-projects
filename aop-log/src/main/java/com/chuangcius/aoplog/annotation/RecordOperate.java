@@ -1,5 +1,8 @@
 package com.chuangcius.aoplog.annotation;
 
+import com.chuangcius.aoplog.bean.Order;
+import com.chuangcius.aoplog.convert.Convert;
+
 import java.lang.annotation.*;
 
 /**
@@ -14,4 +17,6 @@ import java.lang.annotation.*;
 public @interface RecordOperate {
 
     String desc() default "";
+
+    Class<? extends Convert> convert();
 }

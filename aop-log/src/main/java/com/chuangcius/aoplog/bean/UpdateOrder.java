@@ -6,7 +6,7 @@ package com.chuangcius.aoplog.bean;
  * @author chuanciug
  * @date 2022.11.29
  */
-public class UpdateOrder {
+public class UpdateOrder implements Order {
 
     private Long orderId;
 
