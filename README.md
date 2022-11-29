@@ -1,1 +1,1 @@
-# side-project
+# demo-projects
