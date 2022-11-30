@@ -1,4 +1,4 @@
-package com.chuangcius.sonarqube;
+package com.chuangcius.sonarqube
 
 /**
  * MathService

@@ -1,4 +1,4 @@
-package com.chuangcius.sonarqube;
+package com.chuangcius.sonarqube
 
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
