@@ -1,0 +1,11 @@
+myrabbit-starter:
+  rabbit-mq-exchange: demo-exchange
+  rabbit-mq-queue: demo-queue
+  rabbit-mq-routing-key: demo-routing-key
+
+spring:
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
