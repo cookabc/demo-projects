@@ -8,6 +8,7 @@
  */
 
 rootProject.name = "demo-spring-boot-starter"
+include("event-app")
 include("event-starter")
 include("greet-app")
 include("greet-starter")
