@@ -1,0 +1,22 @@
+plugins {
+    id 'wonderland'
+}
+
+wonderland {
+    characterName = 'Tweedledum'
+}
+
+//import org.apache.tools.ant.filters.ReplaceTokens
+//
+//TaskProvider copyQuoteTask = tasks.register('copyQuote', Copy) {
+//    from 'quote.txt'
+//    into "$buildDir/quote"
+//    filter(ReplaceTokens, tokens: [CHARACTER: 'Tweedledum'])
+//}
+//
+//tasks.register('zipQuote', Zip) {
+//    from "$buildDir/quote"
+//    destinationDirectory = buildDir
+//    archiveFileName = 'quote.zip'
+//    dependsOn copyQuoteTask
+//}

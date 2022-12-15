@@ -1,0 +1,3 @@
+rootProject.name = 'demo-gradle'
+include 'tweedledee'
+include 'tweedledum'
