@@ -8,7 +8,7 @@ import org.gradle.api.tasks.TaskAction
 /**
  * RollerCoasterTask
  *
- * @author xugang.song created at 2022.05.26
+ * @author chuangcius created at 2022.05.26
  */
 abstract class RollerCoasterTask extends DefaultTask {
     @Input

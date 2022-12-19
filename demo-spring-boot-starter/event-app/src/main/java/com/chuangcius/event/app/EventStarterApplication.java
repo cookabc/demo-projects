@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * EventStarterApplication
  *
- * @author xugang.song
+ * @author chuangcius
  * @date 2022.12.14
  */
 @EnableScheduling

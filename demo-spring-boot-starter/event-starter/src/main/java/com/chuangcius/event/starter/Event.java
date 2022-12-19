@@ -6,7 +6,7 @@ import lombok.Value;
 /**
  * Event
  *
- * @author xugang.song
+ * @author chuangcius
  * @date 2022.12.14
  */
 @Value

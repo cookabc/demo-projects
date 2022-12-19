@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * EventListenerProperties
  *
- * @author xugang.song
+ * @author chuangcius
  * @date 2022.12.14
  */
 @Data

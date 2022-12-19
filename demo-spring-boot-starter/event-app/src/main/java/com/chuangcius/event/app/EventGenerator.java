@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 /**
  * EventGenerator
  *
- * @author xugang.song
+ * @author chuangcius
  * @date 2022.12.14
  */
 @Component

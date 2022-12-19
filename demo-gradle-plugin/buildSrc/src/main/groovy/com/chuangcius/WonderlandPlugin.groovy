@@ -10,7 +10,7 @@ import org.gradle.api.tasks.bundling.Zip
 /**
  * WonderlandPlugin
  *
- * @author xugang.song created at 2022.05.26
+ * @author chuangcius created at 2022.05.26
  */
 class WonderlandPlugin implements Plugin<Project> {
 
