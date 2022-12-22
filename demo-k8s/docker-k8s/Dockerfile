@@ -1,4 +1,4 @@
-FROM openjdk:20-ea-15-slim-bullseye
+FROM openjdk:21-ea-2-jdk-slim
 RUN useradd --system demo && usermod -a -G demo demo
 USER demo:demo
 ARG JAR_FILE=build/libs/HelloWorld.jar
